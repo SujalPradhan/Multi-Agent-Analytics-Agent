@@ -1,0 +1,43 @@
+# Multi-Agent Analytics System - Dependencies
+
+# API Framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+
+# LLM Client
+openai==1.10.0
+
+# Google APIs
+google-analytics-data==0.18.5
+google-auth==2.27.0
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+gspread==5.12.3
+
+# Data Processing
+pandas==2.2.0
+numpy==1.26.3
+
+# Date/Time Handling
+python-dateutil==2.8.2
+
+# HTTP Client
+requests==2.31.0
+
+# Environment Variables
+python-dotenv==1.0.0
+
+# Logging
+colorlog==6.8.2
+
+# Testing
+pytest==7.4.4
+pytest-asyncio==0.23.3
+pytest-cov==4.1.0
+httpx==0.26.0
+
+# Development
+black==24.1.1
+flake8==7.0.0
+mypy==1.8.0

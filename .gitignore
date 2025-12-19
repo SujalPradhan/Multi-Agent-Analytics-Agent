@@ -1,0 +1,7 @@
+__pycache__/
+.env
+credentials.json
+.vscode/
+.venv/
+venv/
+*.log

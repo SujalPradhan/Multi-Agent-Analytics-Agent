@@ -1,0 +1,811 @@
+(base) sujal@ThrivingSprings:/mnt/d/Hackathon-Spike$ ./test_curl.sh 
+
+==========================================
+SECTION 1: Basic Endpoints
+==========================================
+
+▶ Test: 1.1 Health Check
+  Description: Verify server is running
+✓ PASSED
+{
+  "status": "healthy",
+  "timestamp": "2025-12-19T05:38:47.801294",
+  "orchestrator": "initialized",
+  "agents": {
+    "analytics": false,
+    "seo": true
+  }
+}
+
+▶ Test: 1.2 Root Endpoint
+  Description: Get API information
+✓ PASSED
+{
+  "service": "Spike AI Multi-Agent Analytics API",
+  "version": "1.0.0",
+  "status": "running",
+  "endpoints": {
+    "query": "POST /query",
+    "health": "GET /health"
+  },
+  "docs": "/docs"
+}
+
+▶ Test: 1.3 OpenAPI Docs
+  Description: Check docs endpoint exists
+✓ PASSED
+  Docs available at: http://127.0.0.1:6000/docs
+
+==========================================
+SECTION 2: Tier 1 - Analytics Agent (GA4)
+==========================================
+
+▶ Test: 2.1 Page Views Query
+  Description: Get page views for last 7 days
+✓ PASSED
+{
+  "answer": "For the past week (from 7 days ago to today), your website received a total of **9 page views**.\n\nThis indicates that pages on your site were viewed 9 times during this specific period.",
+  "data": null,
+  "agent_used": "analytics"
+}
+
+▶ Test: 2.2 Top Pages Query
+  Description: Get top 5 pages by views
+✓ PASSED
+{
+  "answer": "This week, from 7 days ago to today, your top-performing page was **/test** with 5 views.\n\nFollowing that, your **/about** page received 3 views, and your homepage (**/**) had 1 view. These are your top 3 pages by views for this period.",
+  "data": null,
+  "agent_used": "analytics"
+}
+
+▶ Test: 2.3 Users and Sessions
+  Description: Get active users and sessions
+✓ PASSED
+{
+  "answer": "In the last 14 days, your website had **6 active users** but **0 sessions**.\n\nThis means that while 6 unique individuals visited your site during this period, no actual user sessions were recorded. This discrepancy often indicates a tracking issue, as active users should typically generate at least one session. It's worth checking your Google Analytics setup to ensure data is being collected correctly.",
+  "data": null,
+  "agent_used": "analytics"
+}
+
+▶ Test: 2.4 Device Categories
+  Description: Get users by device type
+✓ PASSED
+{
+  "answer": "For the last 7 days, all 6 of your active users accessed your site via **desktop** devices.\n\nThis means 100% of your user base during this period used a desktop computer. We don't see any users from mobile or tablet devices in this specific report.",
+  "data": null,
+  "agent_used": "analytics"
+}
+
+▶ Test: 2.5 Traffic Sources
+  Description: Get top traffic sources
+✓ PASSED
+{
+  "answer": "For the last 30 days, your data shows only one identified traffic source: `(not set)`, which brought in all 6 active users.\n\nThis means Google Analytics couldn't determine the origin of these users. No other specific traffic sources were identified in the provided data. To gain better insights, it's recommended to investigate potential tracking issues that might be causing sources to be labeled as `(not set)`.",  
+  "data": null,
+  "agent_used": "analytics"
+}
+
+▶ Test: 2.6 Daily Breakdown
+  Description: Daily page views, users, sessions for /pricing
+✓ PASSED
+{
+  "answer": "I couldn't find any data for the `/pricing` page within the provided results for the last 14 days (14daysAgo to today).\n\nThe dataset you provided only includes information for `/test`, `/about`, and the homepage (`/`). If you were expecting to see data for `/pricing`, please double-check your data source or filters.",
+  "data": null,
+  "agent_used": "analytics"
+}
+
+▶ Test: 2.7 Country Breakdown
+  Description: Users by country
+✓ PASSED
+{
+  "answer": "For the last week (7 days ago to today), your Google Analytics data shows **6 active users**.\n\nA key insight from this report is that while we have the total number of active users, the country information for these 6 users is currently unavailable or not recorded in this specific data pull.",
+  "data": null,
+  "agent_used": "analytics"
+}
+
+==========================================
+SECTION 3: Tier 2 - SEO Agent (Google Sheets)
+==========================================
+
+▶ Test: 3.1 Missing Meta Descriptions
+  Description: Find URLs without meta descriptions
+✓ PASSED
+{
+  "answer": "Unknown field 'meta description'. Did you mean: All Violations? Available columns include: Address, Content Type, Status Code, Status, All Violations, Best Practice Violations, WCAG 2.0 A Violations, WCAG 2.0 AA Violations, WCAG 2.0 AAA Violations, WCAG 2.1 AA Violations...",
+  "data": null,
+  "agent_used": "seo"
+}
+
+▶ Test: 3.2 Non-HTTPS with Long Titles
+  Description: URLs without HTTPS and title > 60 chars
+✓ PASSED
+{
+  "answer": "Unknown field 'title tag'. Did you mean: PSI Status? Available columns include: Address, Content Type, Status Code, Status, All Violations, Best Practice Violations, WCAG 2.0 A Violations, WCAG 2.0 AA Violations, WCAG 2.0 AAA Violations, WCAG 2.1 AA Violations...",
+  "data": null,
+  "agent_used": "seo"
+}
+
+▶ Test: 3.3 Indexability Groups
+  Description: Group pages by indexability status
+✓ PASSED
+{
+  "answer": "Unknown field 'Indexability'. Available columns include: Address, Content Type, Status Code, Status, All Violations, Best Practice Violations, WCAG 2.0 A Violations, WCAG 2.0 AA Violations, WCAG 2.0 AAA Violations, WCAG 2.1 AA Violations...",
+  "data": null,
+  "agent_used": "seo"
+}
+
+▶ Test: 3.4 SEO Health Assessment
+  Description: Percentage of indexable pages
+✓ PASSED
+{
+  "answer": "Unknown field 'Indexability'. Available columns include: Address, Content Type, Status Code, Status, All Violations, Best Practice Violations, WCAG 2.0 A Violations, WCAG 2.0 AA Violations, WCAG 2.0 AAA Violations, WCAG 2.1 AA Violations...",
+  "data": null,
+  "agent_used": "seo"
+}
+
+▶ Test: 3.5 Duplicate Titles
+  Description: Find pages with duplicate titles
+✓ PASSED
+{
+  "answer": "Unknown field 'title tags'. Did you mean: PSI Status? Available columns include: Address, Content Type, Status Code, Status, All Violations, Best Practice Violations, WCAG 2.0 A Violations, WCAG 2.0 AA Violations, WCAG 2.0 AAA Violations, WCAG 2.1 AA Violations...",
+  "data": null,
+  "agent_used": "seo"
+}
+
+▶ Test: 3.6 Broken Links
+  Description: Find pages with 4xx status codes
+✓ PASSED
+{
+  "answer": "No results found for your query. Searched through 21 rows with 2 filter(s) applied.",
+  "data": null,
+  "agent_used": "seo"
+}
+
+▶ Test: 3.7 Missing H1 Tags
+  Description: Find pages without H1 tags
+✓ PASSED
+{
+  "answer": "Unknown field 'H1 tags'. Did you mean: PSI Status, Status? Available columns include: Address, Content Type, Status Code, Status, All Violations, Best Practice Violations, WCAG 2.0 A Violations, WCAG 2.0 AA Violations, WCAG 2.0 AAA Violations, WCAG 2.1 AA Violations...",
+  "data": null,
+  "agent_used": "seo"
+}
+
+==========================================
+SECTION 4: Tier 3 - Multi-Agent Queries
+==========================================
+
+▶ Test: 4.1 Top Pages with SEO Data
+  Description: Top 10 pages by views with title tags
+curl -X POST http://127.0.0.1:6000/query \
+  -H "Content-Type: application/json" \
+  -d '{"query": "Which pages have accessibility violations?"}'curl -X POST http://127.0.0.1:6000/query \
+  -H "Content-Type: application/json" \
+  -d '{"query": "Which pages have accessibility violations?"}'✓ PASSED
+{
+  "answer": "In the last 14 days, the top-viewed pages were:\n1.  **/test**: 5 views (56% of top 3 views)\n2.  **/about**: 3 views (33%)\n3.  **/** (homepage): 1 view (11%)\n\nThese three pages collectively garnered 9 views, with the **/test** page being the clear leader, indicating strong user interest in its content.\n\nHowever, we were unable to retrieve the corresponding HTML title tags for these pages. The requested 'HTML title tag' field is not available in the current data source, which focuses on technical and accessibility metrics.\n\n**Key Findings & Recommendations:**\n*   **High Engagement on `/test`:** The `/test` page significantly outperforms others, suggesting its content resonates well with users. Consider analyzing its success to replicate elements on other pages or expand on related topics.\n*   **Data Limitation for Title Tags:** The inability to retrieve title tags is a critical gap for SEO and content optimization analysis. It is highly recommended to integrate a data source that can capture HTML title tags to enable a more comprehensive understanding of page performance and on-page SEO.\n*   **Overall Traffic Context:** With only 3 pages showing views and a total of 9 views across these top pages, it would be beneficial to assess overall website traffic to determine if this is a typical period or if broader traffic generation strategies are needed.",
+  "data": null,
+  "agent_used": "multi-agent"
+}
+
+▶ Test: 4.2 High Traffic SEO Issues
+  Description: Top 20% pages with missing meta descriptions
+✓ PASSED
+{
+  "answer": "Based on the provided data:\n\n**Key Findings:**\n1.  **High-Traffic Page Identified:** The URL `/test` is a top-performing page, accounting for 55.6% of your site's total screen page views (5 out of 9) over the past 7 days, placing it firmly in your top 20% by views.\n2.  **Meta Description Data Limitation:** The system was unable to directly identify pages with missing or duplicate meta descriptions. The available auditing tool does not recognize \"meta description\" as a specific queryable field, instead offering broader categories like \"All Violations\" or various WCAG compliance checks.\n\n**Unified Answer & Recommendation:**\nWhile `/test` has been identified as a significant traffic driver within your top 20% of pages by views, its meta description status (missing or duplicate) could not be determined from the available data sources.\n\n**Recommendation:**\nGiven its high visibility, it is **highly recommended to manually check the meta description for `/test`** to ensure it is present, unique, and optimized for search engines. For future programmatic checks on meta descriptions, you may need to integrate a different SEO auditing tool or explore if \"All Violations\" within your current tool encompasses meta description-related warnings.",
+  "data": null,
+  "agent_used": "multi-agent"
+}
+
+▶ Test: 4.3 Traffic + SEO Analysis
+  Description: Combine traffic and SEO data
+✓ PASSED
+{
+  "answer": "Based on the provided analysis, here's a synthesis of high-traffic pages and their potential SEO issues:\n\n**High-Traffic Pages Identified:**\n\nThe primary high-traffic page is **`/test`**, which received 5 out of 9 total page views (over 55%) in the last 7-30 days. Other pages with notable traffic include `/about` (3 views) and the homepage `/` (1 view).\n\n**SEO Status and Data Gaps:**\n\nWhile all 21 crawled URLs (including `/test`) returned a **200 OK status** and **no accessibility or best practice violations** were reported by Screaming Frog, a comprehensive assessment of SEO issues for these high-traffic pages is currently **not possible due to significant data retrieval failures and limitations**:\n\n1.  **Core Web Vitals Data Missing:** No Core Web Vitals performance data (LCP, INP, CLS) was successfully retrieved for any of the 21 high-traffic URLs. This is a critical gap as Core Web Vitals are key ranking factors.\n2.  **Key On-Page SEO Metrics Unavailable:** Attempts to retrieve fundamental SEO fields such as 'Indexability', 'Meta Description 1', and 'H1-1' failed. This prevents analysis of crucial on-page optimization elements.\n3.  **Organic Performance Unassessable:** The current data does not allow for analysis of organic keyword rankings, visibility trends, or performance drops, which are essential for identifying true SEO issues.\n\n**Actionable Recommendations:**\n\nTo effectively identify and address SEO issues for your high-traffic pages, particularly `/test`, the following steps are crucial:\n\n1.  **Resolve Core Web Vitals Data Retrieval:**\n    *   Investigate why PageSpeed Insights (PSI) data wasn't fetched (e.g., verify PSI API key configuration in Screaming Frog, check for API rate limits, ensure URLs have sufficient traffic/indexing for Google to collect data, or identify general connection errors).\n    *   Manually check `/test` and other high-traffic URLs directly in Google PageSpeed Insights to confirm if data exists.\n2.  **Ensure Full On-Page SEO Metric Retrieval:**\n    *   Verify your Screaming Frog configuration to ensure that 'Indexability', 'Meta Description', and 'H1' fields can be successfully extracted during crawls.\n3.  **Integrate Additional Data Sources:**\n    *   To understand organic performance and keyword-related issues, integrate data from **Google Search Console**, **Google Analytics** (beyond basic page views), or a third-party keyword tracking tool.\n\nWithout these additional data points, it's impossible to provide a definitive answer regarding specific SEO issues affecting your high-traffic pages.",
+  "data": {
+    "source_5": {
+      "rows": [
+        {
+          "Address": "https://getspike.ai/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/privacy",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/hackathon",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/careers",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/pricing",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/beyond-instinct-the-operating-system-for-modern-marketing-teams/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/coming-soon.html",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "http://getspike.ai/about",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/the-science-of-authenticity-a-data-driven-guide-to-saas-brand-differentiation/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/is-your-martech-stack-obsolete-the-business-case-for-autonomous-ai-tools/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/beyond-a-b-testing-how-continuous-optimization-drives-24-7-growth/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/author/spikeai/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/pre-seed-round/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/author/jing/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/author/shrestha/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/magi-2/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/how-spike-ai-works/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/author/get/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/why-traditional-cro-is-failing-and-what-self-driving-marketing-solves/",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/12-days-of-magi-how-spike-ai-became-the-first-truly-autonomous-marketing-engine/",
+          "PSI Status": "",
+          "PSI Error": ""
+        }
+      ],
+      "columns": [
+        "Address",
+        "PSI Status",
+        "PSI Error"
+      ],
+      "total_rows": 21
+    },
+    "source_6": {
+      "rows": [
+        {
+          "Address": "https://getspike.ai/",
+          "Content Type": "text/html",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/privacy",
+          "Content Type": "text/html",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/hackathon",
+          "Content Type": "text/html",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/careers",
+          "Content Type": "text/html",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/pricing",
+          "Content Type": "text/html",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/beyond-instinct-the-operating-system-for-modern-marketing-teams/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/coming-soon.html",
+          "Content Type": "text/html",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "http://getspike.ai/about",
+          "Content Type": "text/html",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/the-science-of-authenticity-a-data-driven-guide-to-saas-brand-differentiation/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/is-your-martech-stack-obsolete-the-business-case-for-autonomous-ai-tools/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/beyond-a-b-testing-how-continuous-optimization-drives-24-7-growth/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/author/spikeai/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/pre-seed-round/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/author/jing/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/author/shrestha/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/magi-2/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/how-spike-ai-works/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/author/get/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/why-traditional-cro-is-failing-and-what-self-driving-marketing-solves/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        },
+        {
+          "Address": "https://getspike.ai/blog/12-days-of-magi-how-spike-ai-became-the-first-truly-autonomous-marketing-engine/",
+          "Content Type": "text/html; charset=utf-8",
+          "Status Code": "200",
+          "Status": "OK",
+          "All Violations": "",
+          "Best Practice Violations": "",
+          "WCAG 2.0 A Violations": "",
+          "WCAG 2.0 AA Violations": "",
+          "WCAG 2.0 AAA Violations": "",
+          "WCAG 2.1 AA Violations": "",
+          "WCAG 2.2 AA Violations": "",
+          "PSI Status": "",
+          "PSI Error": ""
+        }
+      ],
+      "columns": [
+        "Address",
+        "Content Type",
+        "Status Code",
+        "Status",
+        "All Violations",
+        "Best Practice Violations",
+        "WCAG 2.0 A Violations",
+        "WCAG 2.0 AA Violations",
+        "WCAG 2.0 AAA Violations",
+        "WCAG 2.1 AA Violations",
+        "WCAG 2.2 AA Violations",
+        "PSI Status",
+        "PSI Error"
+      ],
+      "total_rows": 21
+    }
+  },
+  "agent_used": "multi-agent"
+}
+
+==========================================
+SECTION 5: JSON Format Requests
+==========================================
+
+▶ Test: 5.1 Analytics JSON Output
+  Description: Request JSON format explicitly
+✓ PASSED
+{
+  "answer": "Results returned in JSON format.",
+  "data": {
+    "rows": [
+      {
+        "deviceCategory": "desktop",
+        "activeUsers": 6
+      }
+    ],
+    "row_count": 1,
+    "metadata": {
+      "property_id": "516820017",
+      "metrics": [
+        "activeUsers"
+      ],
+      "dimensions": [
+        "deviceCategory"
+      ],
+      "date_range": {
+        "start": "7daysAgo",
+        "end": "today"
+      },
+      "filters": null,
+      "order_by": null
+    }
+  },
+  "agent_used": "analytics"
+}
+
+▶ Test: 5.2 SEO JSON Output
+  Description: Request SEO data in JSON format
+✓ PASSED
+{
+  "answer": "Unknown field 'meta description'. Did you mean: All Violations? Available columns include: Address, Content Type, Status Code, Status, All Violations, Best Practice Violations, WCAG 2.0 A Violations, WCAG 2.0 AA Violations, WCAG 2.0 AAA Violations, WCAG 2.1 AA Violations...",
+  "data": null,
+  "agent_used": "seo"
+}
+
+▶ Test: 5.3 Multi-Agent JSON Output
+  Description: Top 5 pages with title tags in JSON
+✓ PASSED
+{
+  "answer": "Combined results from analytics and SEO data returned in JSON format",
+  "data": {
+    "source_1": {
+      "rows": [
+        {
+          "pagePath": "/test",
+          "screenPageViews": 5
+        },
+        {
+          "pagePath": "/about",
+          "screenPageViews": 3
+        },
+        {
+          "pagePath": "/",
+          "screenPageViews": 1
+        }
+      ],
+      "row_count": 3,
+      "metadata": {
+        "property_id": "516820017",
+        "metrics": [
+          "screenPageViews"
+        ],
+        "dimensions": [
+          "pagePath"
+        ],
+        "date_range": {
+          "start": "7daysAgo",
+          "end": "today"
+        },
+        "filters": null,
+        "order_by": null
+      }
+    }
+  },
+  "agent_used": "multi-agent"
+}
+
+==========================================
+SECTION 6: Error Handling Tests
+==========================================
+
+▶ Test: 6.1 Empty Query
+  Description: Should return 400/422 error
+✓ PASSED
+  Expected error received (HTTP 422)
+
+▶ Test: 6.2 Missing Query Field
+  Description: Should return 422 error
+✓ PASSED
+  Expected error received (HTTP 422)
+
+▶ Test: 6.3 Invalid Property ID
+  Description: Should handle gracefully
+✓ PASSED
+  Expected error received (HTTP 422)
+
+▶ Test: 6.4 Invalid JSON Body
+  Description: Should return 422 error
+✓ PASSED
+  Expected error received (HTTP 422)
+
+▶ Test: 6.5 Analytics without Property ID
+  Description: Should use default or error gracefully
+✓ PASSED
+  Response received (HTTP 200)
+{
+  "answer": "Looking at your Google Analytics data from **7 days ago to today**, your website received a total of **9 page views**. This indicates that your content was viewed 9 times during this period.",
+  "data": null,
+  "agent_used": "analytics"
+}
+
+==========================================
+SECTION 7: Edge Cases
+==========================================
+
+▶ Test: 7.1 Long Query
+  Description: Handle long query string
+✓ PASSED
+"For the last 30 days, your website recorded **9 page views** from **6 active users**.\n\nHowever, it's crucial to note that **zero sessions were recorded**. This is an unusual discrepancy given the page views and users, suggesting a potential data collection issue that should be investigated, as it impacts the reliability of other metrics.\n\nAll recorded activity came from **desktop devices**, with the traffic source listed as '(not set)'. No specific country or city information was captured. The bounce rate is reported as 0%, which is likely a consequence of the absence of recorded sessions.\n\n**Recommendation:** Please check your Google Analytics setup to ensure sessions are being tracked correctly."
+
+▶ Test: 7.2 Special Characters
+  Description: Handle special characters in query
+✓ PASSED
+{
+  "answer": "No results found for your query. Searched through 21 rows with 1 filter(s) applied.",
+  "data": null,
+  "agent_used": "seo"
+}
+
+▶ Test: 7.3 Whitespace Query
+  Description: Should reject whitespace-only query
+✓ PASSED
+  Expected error received (HTTP 422)
+
+==========================================
+TEST SUMMARY
+==========================================
+
+Total Tests: 31
+Passed:      31
+Failed:      0
+
+✓ All tests passed!
