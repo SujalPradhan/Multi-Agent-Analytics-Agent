@@ -1,4 +1,16 @@
-# Spike AI Multi-Agent Analytics System
+---
+title: Multi-Agent Analytics
+emoji: 📊
+colorFrom: blue
+colorTo: purple
+sdk: docker
+pinned: false
+license: mit
+app_port: 7860
+---
+
+
+# Multi-Agent Analytics System
 
 Multi-agent AI system for querying Google Analytics 4 and SEO data using natural language.
 
@@ -9,14 +21,14 @@ Multi-agent AI system for querying Google Analytics 4 and SEO data using natural
 - Python 3.10+
 - Git
 - Google Cloud service account credentials
-- LiteLLM API key
+- OpenAI API key
 
 ### Installation
 
 1. **Clone the repository**
 ```bash
 git clone <repository-url>
-cd Hackathon-Spike
+cd project-name
 ```
 
 2. **Create virtual environment**
@@ -39,8 +51,8 @@ pip install -r requirements.txt
 
 1. **Create `.env` file** (copy from template)
 ```env
-# LiteLLM API Configuration
-LITELLM_API_KEY=sk-your-api-key-here
+# OpenAI API Configuration
+OPENAI_API_KEY=sk-your-api-key-here
 
 # Google Cloud Configuration
 GOOGLE_CREDENTIALS_PATH=credentials.json
