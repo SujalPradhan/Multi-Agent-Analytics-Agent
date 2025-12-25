@@ -1,5 +1,5 @@
 # Technical Architecture Document
-## Multi-Agent Analytics System
+## Spike AI Multi-Agent Analytics System
 
 ---
 
@@ -7,7 +7,7 @@
 
 **Build incrementally. Validate early. Keep it simple.**
 
-We approached development with a single guiding principle: each layer must work independently before integrating with the next. This reduced debugging complexity and ensured production stability.
+We approached this hackathon with a single guiding principle: each layer must work independently before integrating with the next. This reduced debugging complexity and ensured production stability.
 
 ---
 
@@ -16,7 +16,7 @@ We approached development with a single guiding principle: each layer must work 
 ### Phase 1: API Gateway
 **Goal:** Establish a rock-solid entry point before any business logic.
 
-- Built FastAPI server on port 7860 (standard for containerized apps)
+- Built FastAPI server on port 8080 (non-negotiable requirement)
 - Defined strict request/response schemas with Pydantic
 - Added `/health` endpoint for deployment validation
 - No agent logic—just request validation and routing skeleton

@@ -5,3 +5,4 @@ credentials.json
 .venv/
 venv/
 *.log
+RENDER_DEPLOYMENT.md

@@ -58,7 +58,7 @@ def setup_credentials():
 def main():
     """Main entry point for HF Spaces."""
     print("=" * 50)
-    print("Multi-Agent Analytics - Starting on Hugging Face Spaces")
+    print("Spike AI - Starting on Hugging Face Spaces")
     print("=" * 50)
     
     # Set up credentials from secrets

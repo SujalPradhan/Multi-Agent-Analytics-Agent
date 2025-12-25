@@ -1,4 +1,4 @@
-# Multi-Agent Analytics API Docker Build
+# Multi-Stage Build for Spike AI Multi-Agent Analytics API
 # Optimized for Hugging Face Spaces Deployment
 
 FROM python:3.10-slim
@@ -10,7 +10,8 @@ WORKDIR /app
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
-    PORT=7860
+    PORT=10000 \
+    HOST=0.0.0.0
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \

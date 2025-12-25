@@ -4,17 +4,18 @@ API Gateway - FastAPI Server
 This is the main entry point for the Multi-Agent Analytics System.
 Handles HTTP requests, validation, and response formatting.
 
-Port: 7860
+Port: 8080 (CRITICAL - must not change)
 Endpoint: POST /query
 
-OpenAI API Configuration:
+OpenAI API Configuration (via AI Pipe):
+- Base URL: https://aipipe.org/openai/v1
 - Model: gpt-4o-mini
-- Uses OpenAI SDK
-- API Key from OPENAI_API_KEY env variable
+- Uses OpenAI-compatible SDK
+- API Key from OPENAI_API_KEY env variable (AI Pipe Token)
 """
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, validator, Field
 from typing import Optional, Any, Dict
 import uvicorn
@@ -51,7 +52,7 @@ logger = logging.getLogger(__name__)
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="Multi-Agent Analytics API",
+    title="Spike AI Multi-Agent Analytics API",
     version="1.0.0",
     description="Natural language interface for GA4 and SEO data analysis"
 )
@@ -119,7 +120,7 @@ async def startup_event():
     global orchestrator
     
     logger.info("=" * 70)
-    logger.info("Starting Multi-Agent Analytics API")
+    logger.info("Starting Spike AI Multi-Agent Analytics API")
     logger.info("=" * 70)
     
     try:
@@ -157,52 +158,19 @@ async def startup_event():
         raise
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def root():
-    """Root endpoint - returns HTML welcome page"""
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Multi-Agent Analytics API</title>
-        <style>
-            body { font-family: Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }
-            .container { background: white; padding: 30px; border-radius: 8px; max-width: 600px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-            h1 { color: #333; }
-            p { color: #666; line-height: 1.6; }
-            .status { background-color: #d4edda; padding: 10px; border-radius: 4px; margin: 20px 0; }
-            .status-text { color: #155724; font-weight: bold; }
-            .endpoints { background-color: #e7f3ff; padding: 15px; border-radius: 4px; margin: 20px 0; }
-            .endpoints a { color: #0066cc; text-decoration: none; display: block; margin: 8px 0; }
-            .endpoints a:hover { text-decoration: underline; }
-            .info { color: #666; font-size: 14px; margin-top: 20px; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>📊 Multi-Agent Analytics API</h1>
-            <p>AI-powered analytics system with multi-agent support</p>
-            
-            <div class="status">
-                <span class="status-text">✓ Service Running</span>
-            </div>
-            
-            <h2>Available Endpoints</h2>
-            <div class="endpoints">
-                <a href="/docs"><strong>📚 Swagger UI (Interactive Documentation)</strong></a>
-                <a href="/redoc"><strong>📖 ReDoc (Alternative Documentation)</strong></a>
-                <a href="/health"><strong>🏥 Health Check</strong></a>
-            </div>
-            
-            <div class="info">
-                <strong>Version:</strong> 1.0.0<br>
-                <strong>Status:</strong> Running<br>
-                <strong>Endpoints:</strong> POST /query, GET /health
-            </div>
-        </div>
-    </body>
-    </html>
-    """
+    """Root endpoint - API information"""
+    return {
+        "service": "Spike AI Multi-Agent Analytics API",
+        "version": "1.0.0",
+        "status": "running",
+        "endpoints": {
+            "query": "POST /query",
+            "health": "GET /health"
+        },
+        "docs": "/docs"
+    }
 
 
 @app.get("/health")

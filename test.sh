@@ -1,13 +1,13 @@
 #!/bin/bash
 # =============================================================================
-# Multi-Agent Analytics API - Test Suite
+# Spike AI Multi-Agent Analytics API - Test Suite
 # =============================================================================
 # This script tests all API endpoints and tiers
 # Usage: bash test_curl.sh [property_id]
 # =============================================================================
 
 # Configuration
-BASE_URL="http://localhost:7860"
+BASE_URL="https://sujalrp-multi-analytics-agent.hf.space"
 PROPERTY_ID="${1:-516820017}"  # Use argument or default
 
 # Colors for output
